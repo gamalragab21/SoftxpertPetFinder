@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="unknown_error_occur">Unknown Error Occurred!!</string>
+
+    <string name="failed_to_keystore_alias_empty" translatable="false">Failed to generate keyStore, the keyAlias can not be empty.</string>
+    <string name="property_key_is_empty_or_not_found">Trying to get property \'key\' \"%s\", but the key is empty or not found.</string>
+    <string name="error_unexpected_message">Unexpected error occurred. We are working on it.</string>
+    <string name="error_io_unexpected_message">Oops! Something went wrong while fetching the local data. Please try again</string>
+    <string name="unsupported_data_type" translatable="false">Unsupported data type</string>
+    <string name="unexpected_error_occurred_while_encrypting" translatable="false">Unexpected error occurred while encrypting…</string>
+    <string name="unexpected_error_occurred_while_decrypting" translatable="false">Unexpected error occurred while decrypting…</string>
+</resources>
