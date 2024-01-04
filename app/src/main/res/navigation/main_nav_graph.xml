@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="net.xpert.petfinder.ui.fragments.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_petDetailsFragment"
+            app:destination="@id/petDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/entryPointFragment"
         android:name="net.xpert.petfinder.ui.fragments.entryPoint.EntryPointFragment"
@@ -18,5 +22,14 @@
         <action
             android:id="@+id/action_entryPointFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/petDetailsFragment"
+        tools:layout="@layout/fragment_pet_details_screen"
+        android:name="net.xpert.petfinder.ui.fragments.details.PetDetailsFragment"
+        android:label="PetDetailsFragment" >
+        <argument
+            android:name="animal"
+            app:argType="net.xpert.features.getPetByCategoryUC.domain.models.Animal" />
     </fragment>
 </navigation>

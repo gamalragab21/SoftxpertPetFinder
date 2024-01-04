@@ -37,6 +37,7 @@ class PetTypeSelectionAdapter @Inject constructor(
         onItemClickListener = listener
     }
 
+    fun getLasItemClicked() = petTypeItems[lastItemClicked]
     inner class ViewHolder(val binding: ItemPetTypeSelectionLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(item: PetType) = binding.apply {

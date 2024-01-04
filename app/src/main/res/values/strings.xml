@@ -10,4 +10,6 @@
     <string name="pet_amp_care"><![CDATA[Pet & Care]]></string>
     <string name="taking_care_of_your_pets">taking care of your pets</string>
     <string name="na">NA</string>
+    <string name="pet_details">Pet Details</string>
+    <string name="pet_s_website">Pet\'s Website</string>
 </resources>

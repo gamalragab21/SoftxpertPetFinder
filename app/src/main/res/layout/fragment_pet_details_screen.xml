@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/pet_img"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_300sdp"
+        android:layout_margin="@dimen/_10sdp"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_place_holder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/pet_image_view_support"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/black_border_background"
+        app:layout_constraintBottom_toBottomOf="@id/pet_img"
+        app:layout_constraintEnd_toEndOf="@id/pet_img"
+        app:layout_constraintStart_toStartOf="@id/pet_img"
+        app:layout_constraintTop_toTopOf="@id/pet_img" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_pet_details"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintBottom_toTopOf="@+id/website_btn"
+        app:layout_constraintEnd_toEndOf="@id/pet_img"
+        app:layout_constraintStart_toStartOf="@id/pet_img"
+        app:layout_constraintTop_toBottomOf="@id/pet_img">
+
+        <LinearLayout
+            android:id="@+id/layout_pet_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            app:layout_constraintBottom_toTopOf="@id/layout_pet_gender"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/pet_name_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/name"
+                android:textSize="@dimen/_15ssp" />
+
+            <TextView
+                android:id="@+id/pet_name_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_regular"
+                android:maxEms="20"
+                android:maxLines="1"
+                android:textSize="@dimen/_15ssp"
+                tools:text="Cat" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_pet_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            app:layout_constraintBottom_toTopOf="@id/layout_pet_type"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_pet_name">
+
+            <TextView
+                android:id="@+id/pet_gender_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/gender"
+                android:textSize="@dimen/_15ssp" />
+
+            <TextView
+                android:id="@+id/pet_gender_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_regular"
+                android:maxEms="20"
+                android:maxLines="1"
+                android:textSize="@dimen/_15ssp"
+                tools:text="Male" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_pet_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_pet_gender">
+
+            <TextView
+                android:id="@+id/pet_type_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/type"
+                android:textSize="@dimen/_15ssp" />
+
+            <TextView
+                android:id="@+id/pet_type_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_regular"
+                android:maxEms="20"
+                android:maxLines="1"
+                android:textSize="@dimen/_15ssp"
+                tools:text="Animal" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/website_btn"
+        style="@style/SoftxpertButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:shadowColor="@color/greyColor"
+        android:text="@string/pet_s_website"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_pet_details" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,7 +8,9 @@ import net.xpert.petfinder.android.base.BaseFragment
 import net.xpert.petfinder.android.extension.PetFinderColor
 import net.xpert.petfinder.android.extension.PetFinderString
 import net.xpert.petfinder.android.extension.init
+import net.xpert.petfinder.android.extension.navigateSafe
 import net.xpert.petfinder.android.extension.observe
+import net.xpert.petfinder.android.extension.showSnackBar
 import net.xpert.petfinder.android.viewModel.CurrentAction
 import net.xpert.petfinder.databinding.FragmentHomeBinding
 import net.xpert.petfinder.ui.fragments.home.adapters.PetItemAdapter
@@ -43,6 +45,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         petTypeSelectionAdapter.setOnItemClickListener { petType ->
             homeVM.getPetByCategoryType(petType)
         }
+        petItemAdapter.setOnItemClickListener {
+            navigateSafe(HomeFragmentDirections.actionHomeFragmentToPetDetailsFragment(it))
+        }
     }
 
     override fun subscribeToObservables() {
@@ -71,5 +76,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         adapter = petItemAdapter
     }
 
-    override fun onRetryCurrentAction(currentAction: CurrentAction?, message: String) {}
+    override fun onRetryCurrentAction(currentAction: CurrentAction?, message: String) {
+        showSnackBar(message) { homeVM.getPetByCategoryType(petTypeSelectionAdapter.getLasItemClicked()) }
+    }
 }
