@@ -8,6 +8,6 @@
     <fragment
         android:id="@+id/homeFragment"
         tools:layout="@layout/fragment_home"
-        android:name="net.xpert.petfinder.ui.fragments.HomeFragment"
+        android:name="net.xpert.petfinder.ui.fragments.home.HomeFragment"
         android:label="HomeFragment" />
 </navigation>
