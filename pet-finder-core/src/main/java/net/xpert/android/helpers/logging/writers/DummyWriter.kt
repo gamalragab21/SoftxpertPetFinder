@@ -5,7 +5,7 @@ import net.xpert.android.helpers.logging.LogWriter
 /**
  * Do not writes anything
  */
-internal class DummyWriter : LogWriter {
+class DummyWriter : LogWriter {
     override val isDebugEnabled: Boolean
         get() = false
 

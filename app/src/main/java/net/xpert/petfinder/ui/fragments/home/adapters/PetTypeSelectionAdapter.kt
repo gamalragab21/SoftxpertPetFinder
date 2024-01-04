@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.qualifiers.ApplicationContext
+import net.xpert.features.getPetTypes.domain.enums.PetType
 import net.xpert.petfinder.databinding.ItemPetTypeSelectionLayoutBinding
-import net.xpert.petfinder.ui.fragments.home.models.PetType
 import javax.inject.Inject
 
 class PetTypeSelectionAdapter @Inject constructor(
@@ -32,19 +32,6 @@ class PetTypeSelectionAdapter @Inject constructor(
     }
 
     private val differ = AsyncListDiffer(this, differCallBack)
-
-    fun setSelectedItem(brandId: Int) {
-        petTypeItems.find {
-            it.id == brandId
-        }.apply {
-            this?.let {
-                lastItemClicked = petTypeItems.indexOf(it)
-                notifyItemChanged(petTypeItems.indexOf(it))
-            }
-        }
-    }
-
-    fun getLasItemClicked() = petTypeItems[lastItemClicked]
 
     fun setOnItemClickListener(listener: (PetType) -> Unit) {
         onItemClickListener = listener

@@ -5,13 +5,13 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.viewbinding.ViewBinding
+import net.xpert.core.common.data.model.exception.LeonException
+import net.xpert.petfinder.R
 import net.xpert.petfinder.android.extension.bindView
 import net.xpert.petfinder.android.extension.currentNavigationFragments
 import net.xpert.petfinder.android.extension.hideKeyboard
 import net.xpert.petfinder.android.extension.showToastAsShort
 import net.xpert.petfinder.android.viewModel.CurrentAction
-import net.xpert.petfinder.R
-import net.xpert.core.common.data.model.exception.LeonException
 
 abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
 
@@ -55,9 +55,9 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         onValidateForm: (Pair<String, String>) -> Unit = {},
     ) {
         when (exception) {
-            LeonException.Client.Unauthorized -> {
-                // handle Unauthorized
-            }
+            LeonException.Client.Unauthorized -> showToastAsShort(
+                exception.message ?: "You unauthorized"
+            )
 
             is LeonException.Client.ResponseValidation ->
                 if (exception.errors.isEmpty()) showToastAsShort(
@@ -82,9 +82,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
             }
 
             else -> showToastAsShort(exception.message ?: getString(R.string.unknown_error_occur))
-
         }
-
     }
 
     override fun onDestroy() {

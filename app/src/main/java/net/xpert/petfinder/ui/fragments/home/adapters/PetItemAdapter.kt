@@ -6,86 +6,66 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import dagger.hilt.android.qualifiers.ApplicationContext
-import net.xpert.petfinder.databinding.ItemPetTypeSelectionLayoutBinding
-import net.xpert.petfinder.ui.fragments.home.models.PetType
+import net.xpert.features.getPetByCategoryUC.domain.models.Animal
+import net.xpert.petfinder.android.extension.PetFinderDrawable
+import net.xpert.petfinder.android.extension.PetFinderString
+import net.xpert.petfinder.databinding.ItemPetLayoutBinding
 import javax.inject.Inject
 
 class PetItemAdapter @Inject constructor(
     @ApplicationContext private val context: Context,
 ) : RecyclerView.Adapter<PetItemAdapter.ViewHolder>() {
 
-    private var lastItemClicked: Int = 0
+    private var onItemClickListener: ((Animal) -> Unit)? = null
 
-    private var onItemClickListener: ((PetType) -> Unit)? = null
-
-    var petTypeItems: List<PetType>
+    var animals: List<Animal>
         get() = differ.currentList
         set(value) = differ.submitList(value)
 
-    private val differCallBack = object : DiffUtil.ItemCallback<PetType>() {
-        override fun areItemsTheSame(oldItem: PetType, newItem: PetType) =
+    private val differCallBack = object : DiffUtil.ItemCallback<Animal>() {
+        override fun areItemsTheSame(oldItem: Animal, newItem: Animal) =
             oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: PetType, newItem: PetType) =
+        override fun areContentsTheSame(oldItem: Animal, newItem: Animal) =
             oldItem == newItem
     }
 
     private val differ = AsyncListDiffer(this, differCallBack)
 
-    fun setSelectedItem(brandId: Int) {
-        petTypeItems.find {
-            it.id == brandId
-        }.apply {
-            this?.let {
-                lastItemClicked = petTypeItems.indexOf(it)
-                notifyItemChanged(petTypeItems.indexOf(it))
-            }
-        }
-    }
-
-    fun getLasItemClicked() = petTypeItems[lastItemClicked]
-
-    fun setOnItemClickListener(listener: (PetType) -> Unit) {
+    fun setOnItemClickListener(listener: (Animal) -> Unit) {
         onItemClickListener = listener
     }
 
-    inner class ViewHolder(val binding: ItemPetTypeSelectionLayoutBinding) :
+    inner class ViewHolder(val binding: ItemPetLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bindData(item: PetType) = binding.apply {
-            if (lastItemClicked == layoutPosition) {
-                itemTextSelection.isSelected = true
-                onItemClickListener?.invoke(item)
-            } else itemTextSelection.isSelected = false
-
-            itemTextSelection.text = item.type
-
+        fun bindData(item: Animal) = binding.apply {
+            Glide.with(context).load(item.getSmallPhotoUrl()).placeholder(PetFinderDrawable.ic_place_holder)
+                .into(petImg)
+            petNameValue.text = item.name.ifEmpty { context.getString(PetFinderString.na) }
+            petGenderValue.text = item.gender.ifEmpty { context.getString(PetFinderString.na) }
+            petTypeValue.text = item.type.ifEmpty { context.getString(PetFinderString.na) }
 
             root.setOnClickListener {
-                if (lastItemClicked != layoutPosition) {
-                    notifyItemChanged(lastItemClicked)
-                    lastItemClicked = layoutPosition
-                    notifyItemChanged(lastItemClicked)
-                    onItemClickListener?.invoke(item)
-                }
+                onItemClickListener?.invoke(item)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
-            ItemPetTypeSelectionLayoutBinding.inflate(
+            ItemPetLayoutBinding.inflate(
                 LayoutInflater.from(context),
-                parent,
-                false
+                parent, false
             )
         )
 
 
-    override fun getItemCount(): Int = petTypeItems.size
+    override fun getItemCount(): Int = animals.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = petTypeItems[position]
+        val item = animals[position]
         holder.bindData(item)
     }
 }

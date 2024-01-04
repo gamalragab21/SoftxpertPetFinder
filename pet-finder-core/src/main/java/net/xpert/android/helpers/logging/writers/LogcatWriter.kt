@@ -3,7 +3,7 @@ package net.xpert.android.helpers.logging.writers
 import android.util.Log
 import net.xpert.android.helpers.logging.LogWriter
 
-internal class LogcatWriter(private val tagKey: String, override val isDebugEnabled: Boolean) :
+class LogcatWriter(private val tagKey: String, override val isDebugEnabled: Boolean) :
     LogWriter {
 
     override fun debug(clazz: Class<*>, message: String?) {

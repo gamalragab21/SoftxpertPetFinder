@@ -7,6 +7,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
+        android:theme="@style/Theme.MaterialComponents.Light"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_10sdp"
         app:cardCornerRadius="@dimen/_15sdp"
@@ -50,7 +51,6 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:paddingVertical="@dimen/_10sdp"
                 app:layout_constraintBottom_toBottomOf="@id/pet_img"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/pet_img"
@@ -78,12 +78,15 @@
 
                     <TextView
                         android:id="@+id/pet_name_value"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:maxEms="20"
                         android:fontFamily="@font/poppins_regular"
                         android:textSize="@dimen/_15ssp"
-                        tools:text="Cat" />
+                        tools:text="Catggggggggggggggggggggggggggggggggggggggggggggggggggg" />
 
                 </LinearLayout>
 
@@ -109,9 +112,12 @@
 
                     <TextView
                         android:id="@+id/pet_gender_value"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:maxEms="20"
                         android:fontFamily="@font/poppins_regular"
                         android:textSize="@dimen/_15ssp"
                         tools:text="Male" />
@@ -140,9 +146,12 @@
 
                     <TextView
                         android:id="@+id/pet_type_value"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:maxEms="20"
                         android:fontFamily="@font/poppins_regular"
                         android:textSize="@dimen/_15ssp"
                         tools:text="Animal" />

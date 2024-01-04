@@ -6,7 +6,7 @@ import net.xpert.android.helpers.logging.file.FileUtil
 import net.xpert.android.helpers.logging.file.LogType
 import java.io.File
 
-internal class FileWriter(
+class FileWriter(
     folderName: String, fileName: String, private val tagKey: String,
     override val isDebugEnabled: Boolean
 ) : LogWriter {
