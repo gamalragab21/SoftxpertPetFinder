@@ -2,7 +2,7 @@ package net.xpert.android.helpers.logging.writers
 
 import net.xpert.android.helpers.logging.LogWriter
 
-internal class ConsoleWriter(private val appName: String, override val isDebugEnabled: Boolean) :
+class ConsoleWriter(private val appName: String, override val isDebugEnabled: Boolean) :
     LogWriter {
 
     override fun debug(clazz: Class<*>, message: String?) {

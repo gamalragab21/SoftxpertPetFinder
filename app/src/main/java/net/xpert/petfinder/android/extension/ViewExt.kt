@@ -25,6 +25,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import net.xpert.petfinder.R
 
@@ -206,4 +208,16 @@ fun showContentBehindTheStatusBar(activity: Activity, view: View) {
             WindowInsetsCompat.CONSUMED
         }
     }
+}
+
+fun RecyclerView.init(
+    animator: RecyclerView.ItemAnimator? = null,
+    nestedScroll: Boolean = false,
+    fixedSize: Boolean = true,
+    lm: RecyclerView.LayoutManager = LinearLayoutManager(context),
+) = apply {
+    itemAnimator = animator
+    isNestedScrollingEnabled = nestedScroll
+    setHasFixedSize(fixedSize)
+    layoutManager = lm
 }

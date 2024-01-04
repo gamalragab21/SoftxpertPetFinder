@@ -13,3 +13,4 @@
 .externalNativeBuild
 .cxx
 local.properties
+/pet-finder-core/build/

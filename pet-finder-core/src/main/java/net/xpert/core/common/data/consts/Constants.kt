@@ -2,12 +2,13 @@ package net.xpert.core.common.data.consts
 
 internal object Constants {
 
-    const val SOFTXPERT_DB_NAME: String = "Chefea_db_name"
+    const val SOFTXPERT_DB_NAME: String = "softexpert_db_name"
     const val CLIENT_ID = "client_id"
     const val CLIENT_SECRET = "client_secret"
     const val AUTHORIZATION = "Authorization"
     const val GRANT_TYPE = "grant_type"
     const val CLIENT_CREDENTIALS = "client_credentials"
+    const val ANIMAL_TYPE = "type"
 
     // For Remote response
     const val CODE = "code"

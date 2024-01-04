@@ -3,11 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph.xml"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/entryPointFragment">
 
     <fragment
         android:id="@+id/homeFragment"
-        tools:layout="@layout/fragment_home"
-        android:name="net.xpert.petfinder.ui.fragments.HomeFragment"
-        android:label="HomeFragment" />
+        android:name="net.xpert.petfinder.ui.fragments.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/entryPointFragment"
+        android:name="net.xpert.petfinder.ui.fragments.entryPoint.EntryPointFragment"
+        android:label="EntryPointFragment"
+        tools:layout="@layout/fragment_entry_point">
+        <action
+            android:id="@+id/action_entryPointFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>

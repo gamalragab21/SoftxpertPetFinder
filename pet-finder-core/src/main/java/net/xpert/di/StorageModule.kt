@@ -10,6 +10,7 @@ import dagger.hilt.components.SingletonComponent
 import net.xpert.core.common.data.consts.Constants
 import net.xpert.core.common.data.repository.local.keyValue.dataStore.DataStoreStorageFile
 import net.xpert.core.common.data.repository.local.room.PetFinderDatabase
+import net.xpert.core.common.domain.repository.local.keyValue.dataStore.IDataStoreStorageFile
 import javax.inject.Singleton
 
 @Module
@@ -25,5 +26,5 @@ internal object StorageModule {
 
     @Provides
     @Singleton
-    fun provideDataStoreFile(@ApplicationContext context: Context) = DataStoreStorageFile(context)
+    fun providePetDataStoreStorageFile(@ApplicationContext context: Context):IDataStoreStorageFile = DataStoreStorageFile(context)
 }

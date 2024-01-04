@@ -3,4 +3,11 @@
     <string name="unknown_error_occur">Unknown Error Occurred!!</string>
     <string name="retry">Retry</string>
     <string name="pets">Pets</string>
+    <string name="all">All</string>
+    <string name="name">Name</string>
+    <string name="gender">Gender</string>
+    <string name="type">Type</string>
+    <string name="pet_amp_care"><![CDATA[Pet & Care]]></string>
+    <string name="taking_care_of_your_pets">taking care of your pets</string>
+    <string name="na">NA</string>
 </resources>

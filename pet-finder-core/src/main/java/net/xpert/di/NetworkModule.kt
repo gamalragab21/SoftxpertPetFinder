@@ -9,10 +9,12 @@ import net.xpert.android.helpers.properties.ConfigurationKey
 import net.xpert.android.helpers.properties.ConfigurationUtil
 import net.xpert.core.BuildConfig
 import net.xpert.core.common.data.repository.remote.PetFinderApiService
+import net.xpert.core.common.data.repository.remote.PetFinderHeaderInterceptor
 import net.xpert.core.common.data.repository.remote.RetrofitNetworkProvider
 import net.xpert.core.common.data.repository.remote.converter.ResponseBodyConverter
 import net.xpert.core.common.data.repository.remote.factory.LeonCallAdapterFactory
 import net.xpert.core.common.domain.repository.remote.INetworkProvider
+import net.xpert.features.getUserTokenUC.domain.interactor.GetUserTokenUC
 import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -54,24 +56,30 @@ internal object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(interceptor: HttpLoggingInterceptor) =
-        OkHttpClient().newBuilder().apply {
-            connectTimeout(30L, TimeUnit.SECONDS)
-            retryOnConnectionFailure(true)
-            connectionPool(
-                ConnectionPool(30L.toInt(), 500000, TimeUnit.MILLISECONDS)
-            )
-            readTimeout(30L, TimeUnit.SECONDS)
-            writeTimeout(30L, TimeUnit.SECONDS)
-            addInterceptor(interceptor)
-            addInterceptor(getHttpLoggingInterceptor())
-        }
+    fun provideOkHttpClient(
+        interceptor: HttpLoggingInterceptor, headerInterceptor: PetFinderHeaderInterceptor
+    ) = OkHttpClient().newBuilder().apply {
+        connectTimeout(30L, TimeUnit.SECONDS)
+        retryOnConnectionFailure(true)
+        connectionPool(
+            ConnectionPool(30L.toInt(), 500000, TimeUnit.MILLISECONDS)
+        )
+        readTimeout(30L, TimeUnit.SECONDS)
+        writeTimeout(30L, TimeUnit.SECONDS)
+        addInterceptor(headerInterceptor)
+        addInterceptor(interceptor)
+    }
 
     @Provides
     @Singleton
-    fun getHttpLoggingInterceptor(): HttpLoggingInterceptor =
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor =
         HttpLoggingInterceptor().apply {
             level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
             else HttpLoggingInterceptor.Level.NONE
         }
+
+    @Provides
+    @Singleton
+    fun providePetFinderHeaderInterceptor(getUserTokenUC: GetUserTokenUC): PetFinderHeaderInterceptor =
+        PetFinderHeaderInterceptor(getUserTokenUC)
 }
