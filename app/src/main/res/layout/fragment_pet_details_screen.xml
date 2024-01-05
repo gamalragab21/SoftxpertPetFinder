@@ -233,7 +233,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/website_btn"
-                    style="@style/SoftxpertButton"
+                    style="@style/PetFinderButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10sdp"

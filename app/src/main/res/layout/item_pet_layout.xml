@@ -7,10 +7,10 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:theme="@style/Theme.MaterialComponents.Light"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/_10sdp"
         android:layout_marginHorizontal="@dimen/_5sdp"
+        android:layout_marginVertical="@dimen/_10sdp"
+        android:theme="@style/Theme.MaterialComponents.Light"
         app:cardCornerRadius="@dimen/_15sdp"
         app:cardElevation="@dimen/_3sdp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -82,10 +82,10 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:maxLines="1"
                         android:ellipsize="end"
-                        android:maxEms="20"
                         android:fontFamily="@font/poppins_regular"
+                        android:maxEms="20"
+                        android:maxLines="1"
                         android:textSize="@dimen/_15ssp"
                         tools:text="Cat" />
 
@@ -116,10 +116,10 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:maxLines="1"
                         android:ellipsize="end"
-                        android:maxEms="20"
                         android:fontFamily="@font/poppins_regular"
+                        android:maxEms="20"
+                        android:maxLines="1"
                         android:textSize="@dimen/_15ssp"
                         tools:text="Male" />
 
@@ -150,10 +150,10 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:maxLines="1"
                         android:ellipsize="end"
-                        android:maxEms="20"
                         android:fontFamily="@font/poppins_regular"
+                        android:maxEms="20"
+                        android:maxLines="1"
                         android:textSize="@dimen/_15ssp"
                         tools:text="Animal" />
 

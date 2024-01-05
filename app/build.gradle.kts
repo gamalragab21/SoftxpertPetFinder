@@ -12,11 +12,11 @@ plugins {
 }
 
 android {
-    namespace = "net.xpert.petfinder"
+    namespace = "net.soft.petFinder"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "net.xpert.petfinder"
+        applicationId = "net.soft.petFinder"
         minSdk = 27
         targetSdk = 34
         versionCode = 1
@@ -89,7 +89,6 @@ dependencies {
 
 
     // Android LifeCycle
-//    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")     // Extensions
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")   // LiveData
 
     implementation("com.intuit.sdp:sdp-android:1.1.0")
