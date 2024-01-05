@@ -6,7 +6,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import net.xpert.android.helpers.properties.ConfigurationUtil
+import net.xpert.android.helpers.properties.data.ConfigurationUtil
+import net.xpert.android.helpers.properties.domain.IConfigurationUtil
 import javax.inject.Singleton
 
 @Module
@@ -15,7 +16,6 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideConfigUtils(@ApplicationContext context: Context) =
+    fun provideConfigUtils(@ApplicationContext context: Context): IConfigurationUtil =
         ConfigurationUtil(context, "softxpert-configuration.properties")
-
 }

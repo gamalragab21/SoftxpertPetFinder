@@ -4,8 +4,7 @@ import net.xpert.android.extentions.base64Decode
 import net.xpert.android.extentions.base64Encode
 import net.xpert.android.extentions.getModelFromJSON
 import net.xpert.android.extentions.toJson
-import net.xpert.android.helpers.properties.ConfigurationKey
-import net.xpert.android.helpers.properties.ConfigurationUtil
+import net.xpert.android.helpers.properties.domain.IConfigurationUtil
 import net.xpert.core.common.data.repository.local.keyValue.StorageKeyEnum
 import net.xpert.core.common.domain.repository.local.keyValue.dataStore.IDataStoreStorageFile
 import net.xpert.features.encryption.domain.repository.IEncryptionHelper
@@ -15,24 +14,18 @@ import net.xpert.features.getUserTokenUC.domain.repository.local.IGetUserTokenLo
 internal class GetUserTokenLocalDs(
     private val dataStoreStorageFile: IDataStoreStorageFile,
     private val encryptionHelper: IEncryptionHelper,
-    private val configurationUtil: ConfigurationUtil
-) :
-    IGetUserTokenLocalDs {
-    override suspend fun isFirstTime(): Boolean {
-        return dataStoreStorageFile.storageKV.readEntry(StorageKeyEnum.IS_FIRST_TIME, true)
-    }
+    private val configurationUtil: IConfigurationUtil
+) : IGetUserTokenLocalDs {
 
-    override suspend fun setISFirstTime(isFirstTime: Boolean) {
-        return dataStoreStorageFile.storageKV.saveEntry(StorageKeyEnum.IS_FIRST_TIME, isFirstTime)
-    }
+    override suspend fun getUserToken(): TokenEntity {
+        val storedTokenJson =
+            dataStoreStorageFile.storageKV.readEntry(StorageKeyEnum.USER_TOKEN, "")
 
-    override suspend fun getUserToke(): TokenEntity {
-        val tokenResult = dataStoreStorageFile.storageKV.readEntry(StorageKeyEnum.USER_TOKEN, "")
-        val tokenEntity =
-            if (tokenResult.isNotEmpty()) tokenResult.getModelFromJSON(TokenEntity::class.java)
-            else TokenEntity()
-        tokenEntity.accessToken = decryptToken(tokenEntity.accessToken)
-        return tokenEntity
+        return if (storedTokenJson.isNotEmpty()) {
+            storedTokenJson.getModelFromJSON<TokenEntity>(TokenEntity::class.java).apply {
+                accessToken = decryptToken(accessToken)
+            }
+        } else TokenEntity()
     }
 
     override suspend fun saveUserToken(result: TokenEntity) {
@@ -55,5 +48,5 @@ internal class GetUserTokenLocalDs(
     }
 
     private fun getSecretKeyAsKeyAlias() =
-        configurationUtil.getProperty(ConfigurationKey.SECRET_KEY)
+        configurationUtil.getApiKey()
 }

@@ -5,8 +5,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import net.xpert.android.helpers.properties.ConfigurationKey
-import net.xpert.android.helpers.properties.ConfigurationUtil
+import net.xpert.android.helpers.properties.domain.IConfigurationUtil
 import net.xpert.core.BuildConfig
 import net.xpert.core.common.data.repository.remote.PetFinderApiService
 import net.xpert.core.common.data.repository.remote.PetFinderHeaderInterceptor
@@ -14,7 +13,7 @@ import net.xpert.core.common.data.repository.remote.RetrofitNetworkProvider
 import net.xpert.core.common.data.repository.remote.converter.ResponseBodyConverter
 import net.xpert.core.common.data.repository.remote.factory.LeonCallAdapterFactory
 import net.xpert.core.common.domain.repository.remote.INetworkProvider
-import net.xpert.features.getUserTokenUC.domain.interactor.GetUserTokenUC
+import net.xpert.features.getUserTokenUC.domain.interactor.GetLocalUserTokenUC
 import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -42,10 +41,10 @@ internal object NetworkModule {
     fun provideRetrofit(
         gsonFactory: GsonConverterFactory,
         okHttpClient: OkHttpClient.Builder,
-        configurationUtil: ConfigurationUtil
+        configurationUtil: IConfigurationUtil
     ): Retrofit =
         Retrofit.Builder().client(okHttpClient.build())
-            .baseUrl(configurationUtil.getProperty(ConfigurationKey.SERVER_BASE_URL))
+            .baseUrl(configurationUtil.getServerBaseUrl())
             .addConverterFactory(gsonFactory)
             .addCallAdapterFactory(LeonCallAdapterFactory.create(ResponseBodyConverter())).build()
 
@@ -66,8 +65,8 @@ internal object NetworkModule {
         )
         readTimeout(30L, TimeUnit.SECONDS)
         writeTimeout(30L, TimeUnit.SECONDS)
-        addInterceptor(headerInterceptor)
         addInterceptor(interceptor)
+        addInterceptor(headerInterceptor)
     }
 
     @Provides
@@ -80,6 +79,6 @@ internal object NetworkModule {
 
     @Provides
     @Singleton
-    fun providePetFinderHeaderInterceptor(getUserTokenUC: GetUserTokenUC): PetFinderHeaderInterceptor =
-        PetFinderHeaderInterceptor(getUserTokenUC)
+    fun providePetFinderHeaderInterceptor(getLocalUserTokenUC: GetLocalUserTokenUC): PetFinderHeaderInterceptor =
+        PetFinderHeaderInterceptor(getLocalUserTokenUC)
 }

@@ -34,6 +34,6 @@ class EntryPointFragment : BaseFragment<FragmentEntryPointBinding>() {
     }
 
     override fun onRetryCurrentAction(currentAction: CurrentAction?, message: String) {
-        showSnackBar(message) { entryPointVM.generateUserTokenIfIsFirstTimeUsingApp() }
+        showSnackBar(message) { entryPointVM.generateUserTokenIfLocalTokenIsExpired() }
     }
 }

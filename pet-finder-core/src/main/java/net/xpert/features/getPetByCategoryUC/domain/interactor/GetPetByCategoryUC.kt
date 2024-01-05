@@ -2,6 +2,7 @@ package net.xpert.features.getPetByCategoryUC.domain.interactor
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import net.xpert.core.common.data.model.Resource
 import net.xpert.core.common.data.model.exception.LeonException
 import net.xpert.core.common.domain.interactor.UseCaseLocalThenRemoteThenCache
 import net.xpert.features.getPetByCategoryUC.data.models.CategoryPetRequest
@@ -29,5 +30,12 @@ class GetPetByCategoryUC @Inject constructor(private val repository: IGetPetRepo
 
     override suspend fun executeLocalOperation(domain: List<Animal>, body: CategoryPetRequest?) {
         repository.saveAnimals(domain)
+    }
+
+    override suspend fun validateFailureResponse(
+        exception: LeonException,
+        body: CategoryPetRequest?
+    ): Resource<List<Animal>>? {
+        return super.validateFailureResponse(exception, body)
     }
 }

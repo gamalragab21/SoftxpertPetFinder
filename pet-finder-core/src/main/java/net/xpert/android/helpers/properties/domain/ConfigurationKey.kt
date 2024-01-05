@@ -1,4 +1,4 @@
-package net.xpert.android.helpers.properties
+package net.xpert.android.helpers.properties.domain
 
 enum class ConfigurationKey(val key: String) {
     SERVER_BASE_URL("SERVER_BASE_URL"),

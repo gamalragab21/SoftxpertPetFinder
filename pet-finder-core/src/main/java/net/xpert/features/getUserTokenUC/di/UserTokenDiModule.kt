@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import net.xpert.android.helpers.properties.ConfigurationUtil
+import net.xpert.android.helpers.properties.domain.IConfigurationUtil
 import net.xpert.core.common.domain.repository.local.keyValue.dataStore.IDataStoreStorageFile
 import net.xpert.core.common.domain.repository.remote.INetworkProvider
 import net.xpert.features.encryption.domain.repository.IEncryptionHelper
@@ -29,7 +29,7 @@ internal object UserTokenDiModule {
     @Singleton
     fun provideUserTokenLocalDs(
         dataStoreStorageFile: IDataStoreStorageFile,
-        encryptionHelper: IEncryptionHelper, configurationUtil: ConfigurationUtil
+        encryptionHelper: IEncryptionHelper, configurationUtil: IConfigurationUtil
     ): IGetUserTokenLocalDs =
         GetUserTokenLocalDs(dataStoreStorageFile,encryptionHelper, configurationUtil)
 

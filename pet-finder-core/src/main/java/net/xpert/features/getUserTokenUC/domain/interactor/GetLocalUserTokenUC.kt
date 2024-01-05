@@ -8,10 +8,10 @@ import net.xpert.features.getUserTokenUC.domain.models.Token
 import net.xpert.features.getUserTokenUC.domain.repository.local.IGetUserTokenLocalDs
 import javax.inject.Inject
 
-internal class GetUserTokenUC @Inject constructor(private val localDs: IGetUserTokenLocalDs) :
+internal class GetLocalUserTokenUC @Inject constructor(private val localDs: IGetUserTokenLocalDs) :
     UseCaseLocal<Token, Unit>() {
     override fun executeLocalDS(body: Unit?): Flow<Token> = flow {
-        val result = localDs.getUserToke()
+        val result = localDs.getUserToken()
         emit(UserTokenMapper.entityToDomain(result))
     }
 }

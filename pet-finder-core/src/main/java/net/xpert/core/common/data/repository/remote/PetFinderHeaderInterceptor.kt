@@ -5,12 +5,12 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import net.xpert.core.common.data.consts.Constants
 import net.xpert.core.common.data.model.Resource
-import net.xpert.features.getUserTokenUC.domain.interactor.GetUserTokenUC
+import net.xpert.features.getUserTokenUC.domain.interactor.GetLocalUserTokenUC
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
 
-internal class PetFinderHeaderInterceptor(private val getUserTokenUC: GetUserTokenUC) :
+internal class PetFinderHeaderInterceptor(private val getLocalUserTokenUC: GetLocalUserTokenUC) :
     Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
@@ -31,7 +31,7 @@ internal class PetFinderHeaderInterceptor(private val getUserTokenUC: GetUserTok
 
     private suspend fun getUserTokenAsMap(): String = withContext(Dispatchers.IO) {
         var token = ""
-        getUserTokenUC.invoke(multipleInvoke = true).collect {
+        getLocalUserTokenUC.invoke(multipleInvoke = true).collect {
             token = when (it) {
                 is Resource.Failure -> ""
                 is Resource.Progress -> return@collect

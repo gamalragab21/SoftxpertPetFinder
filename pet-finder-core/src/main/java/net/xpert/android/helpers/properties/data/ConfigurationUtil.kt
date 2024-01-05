@@ -1,15 +1,30 @@
-package net.xpert.android.helpers.properties
+package net.xpert.android.helpers.properties.data
 
 import android.content.Context
+import net.xpert.android.helpers.properties.domain.ConfigurationKey
+import net.xpert.android.helpers.properties.domain.IConfigurationUtil
 import net.xpert.core.R
 import java.io.IOException
 import java.util.Properties
 
-class ConfigurationUtil(private val context: Context, private val fileName: String) {
+internal class ConfigurationUtil(private val context: Context, private val fileName: String) :
+    IConfigurationUtil {
 
     private var properties = Properties()
 
-    fun getProperty(key: ConfigurationKey): String {
+    override fun getApiKey(): String {
+        return getProperty(ConfigurationKey.API_KEY)
+    }
+
+    override fun getSecretKey(): String {
+        return getProperty(ConfigurationKey.SECRET_KEY)
+    }
+
+    override fun getServerBaseUrl(): String {
+        return getProperty(ConfigurationKey.SERVER_BASE_URL)
+    }
+
+    override fun getProperty(key: ConfigurationKey): String {
         val keyValue = getPropertiesFile().getProperty(key.key, "")
 
         return keyValue.ifEmpty {

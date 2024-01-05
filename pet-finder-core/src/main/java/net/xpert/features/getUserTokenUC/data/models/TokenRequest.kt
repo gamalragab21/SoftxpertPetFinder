@@ -1,5 +1,6 @@
 package net.xpert.features.getUserTokenUC.data.models
 
+import net.xpert.android.helpers.properties.domain.IConfigurationUtil
 import net.xpert.core.common.data.consts.Constants
 import net.xpert.core.common.domain.model.request.IRequestValidation
 import net.xpert.core.common.domain.model.request.RemoteRequest
@@ -29,4 +30,11 @@ data class TokenRequest(
         )
     }
 
+    companion object {
+        fun buildTokenRequestFromAssets(configurationUtil: IConfigurationUtil): TokenRequest {
+            return TokenRequest(
+                configurationUtil.getApiKey(), configurationUtil.getSecretKey(),
+            )
+        }
+    }
 }

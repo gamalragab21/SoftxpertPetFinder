@@ -33,6 +33,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             backgroundColor = PetFinderColor.colorPrimary,
             titleColor = PetFinderColor.white
         )
+        onSwipeRefreshStatus(true)
 
         initSelectionPetTypesRecyclerView()
         initPetTypeItemsRecyclerView()
@@ -58,10 +59,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
+    override fun onRefreshView() {
+        homeVM.getPetByCategoryType(petTypeSelectionAdapter.getLasItemClicked())
+    }
+
     private fun handleUiState(state: HomeState) {
         when (state) {
             is HomeState.Failure -> handleHttpsStatusCode(state.exception)
-            is HomeState.Loading -> showProgress(state.loading)
+            is HomeState.Loading -> {
+                showProgress(state.loading)
+                if (!state.loading) stopSwipeRefreshLoading()
+            }
+
             is HomeState.ShowPetData -> petItemAdapter.animals = state.animals
         }
     }
@@ -72,11 +81,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun initPetTypeItemsRecyclerView() = binding.petsFinderRecyclerView.apply {
-        init(lm = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false))
+        init(
+            lm = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false),
+            nestedScroll = true
+        )
         adapter = petItemAdapter
     }
 
     override fun onRetryCurrentAction(currentAction: CurrentAction?, message: String) {
-        showSnackBar(message) { homeVM.getPetByCategoryType(petTypeSelectionAdapter.getLasItemClicked()) }
+        showSnackBar(message) { onRefreshView() }
     }
 }
