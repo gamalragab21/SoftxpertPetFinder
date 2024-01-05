@@ -15,9 +15,22 @@ internal data class AnimalDto(
     @SerializedName("name")
     var name: String,
     @SerializedName("photos")
-    var photos: List<PhotoDto>,
+    private var photos: List<PhotoDto>,
     @SerializedName("type")
     var type: String,
+    @SerializedName("contact")
+    var contact: ContactDto,
+    @SerializedName("size")
+    var size: String,
     @SerializedName("url")
-    var url: String,
-)
+    var url: String
+) {
+    internal fun getFirstPhoto(): PhotoDto {
+        return if (photos.isEmpty()) PhotoDto("", "")
+        else photos.first()
+    }
+
+    internal fun getPetAddress(): String = with(contact.address) {
+        return city.plus(",").plus(state).plus(",").plus(country)
+    }
+}

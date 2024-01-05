@@ -7,23 +7,23 @@ import net.xpert.android.helpers.logging.getClassLogger
 import net.xpert.android.helpers.properties.domain.IConfigurationUtil
 import net.xpert.core.common.data.model.Resource
 import net.xpert.features.getUserTokenUC.data.models.TokenRequest
-import net.xpert.features.getUserTokenUC.domain.interactor.TokenRefreshUC
+import net.xpert.features.getUserTokenUC.domain.interactor.CheckUserTokenExistenceUC
 import net.xpert.petfinder.android.viewModel.AndroidBaseViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class EntryPointVM @Inject constructor(
     context: Application,
-    private val tokenRefreshUC: TokenRefreshUC,
+    private val checkUserTokenExistenceUC: CheckUserTokenExistenceUC,
     private val configurationUtil: IConfigurationUtil
 ) : AndroidBaseViewModel<EntryPointState>(context) {
 
 
-    fun generateUserTokenIfLocalTokenIsExpired() {
-        tokenRefreshUC.invoke(
+    fun generateUserTokenIfLocalTokenNotExistence() {
+        checkUserTokenExistenceUC.invoke(
             viewModelScope, TokenRequest.buildTokenRequestFromAssets(configurationUtil)
         ) {
-            logger.error("generateUserTokenIfIsFirstTimeUsingApp: $it")
+            logger.error("generateUserTokenIfLocalTokenNotExistence: $it")
             when (it) {
                 is Resource.Failure -> produce(EntryPointState.Failure(it.exception))
                 is Resource.Progress -> produce(EntryPointState.Loading(it.loading))
@@ -33,7 +33,7 @@ class EntryPointVM @Inject constructor(
     }
 
     init {
-        generateUserTokenIfLocalTokenIsExpired()
+        generateUserTokenIfLocalTokenNotExistence()
     }
 
     companion object {

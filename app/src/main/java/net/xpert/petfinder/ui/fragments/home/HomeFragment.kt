@@ -10,6 +10,7 @@ import net.xpert.petfinder.android.extension.PetFinderString
 import net.xpert.petfinder.android.extension.init
 import net.xpert.petfinder.android.extension.navigateSafe
 import net.xpert.petfinder.android.extension.observe
+import net.xpert.petfinder.android.extension.show
 import net.xpert.petfinder.android.extension.showSnackBar
 import net.xpert.petfinder.android.viewModel.CurrentAction
 import net.xpert.petfinder.databinding.FragmentHomeBinding
@@ -44,6 +45,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun setActions() {
         petTypeSelectionAdapter.setOnItemClickListener { petType ->
+            petItemAdapter.animals = emptyList()
             homeVM.getPetByCategoryType(petType)
         }
         petItemAdapter.setOnItemClickListener {
@@ -65,15 +67,31 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun handleUiState(state: HomeState) {
         when (state) {
-            is HomeState.Failure -> handleHttpsStatusCode(state.exception)
+            is HomeState.Failure -> {
+                handleHttpsStatusCode(state.exception)
+                updateNoDataView(
+                    true,
+                    state.exception.message ?: getString(PetFinderString.unknown_error_occur)
+                )
+            }
+
             is HomeState.Loading -> {
                 showProgress(state.loading)
                 if (!state.loading) stopSwipeRefreshLoading()
             }
 
-            is HomeState.ShowPetData -> petItemAdapter.animals = state.animals
+            is HomeState.ShowPetData -> {
+                petItemAdapter.animals = state.animals
+                updateNoDataView(state.animals.isEmpty())
+            }
         }
     }
+
+    private fun updateNoDataView(show: Boolean = false, error: String? = null) =
+        with(binding.emptyViewLayout) {
+            emptyView.show(show)
+            textEmptyErr.text = error
+        }
 
     private fun initSelectionPetTypesRecyclerView() = binding.petTypeSelectionRecyclerView.apply {
         init(lm = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false))

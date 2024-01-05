@@ -10,10 +10,9 @@ data class Animal(
     var gender: String,
     @PrimaryKey var id: Int,
     var name: String,
-    var photos: List<Photo>,
+    var photos: Photo,
     var type: String,
+    var address: String,
+    var size: String,
     var url: String,
-) : BaseDomain() {
-    fun getMediumPhotoUrl() = if (photos.isNotEmpty()) photos.first().medium else ""
-    fun getSmallPhotoUrl() = if (photos.isNotEmpty()) photos.first().small else ""
-}
+) : BaseDomain()

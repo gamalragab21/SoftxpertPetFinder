@@ -66,8 +66,8 @@ dependencies {
     androidTestImplementation("com.google.truth:truth:$truthVersion")
     androidTestImplementation("app.cash.turbine:turbine:$turbineVersion")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-//    androidTestImplementation("com.google.dagger:hilt-android-testing:2.47")
-//    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.47")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.47")
+    kspAndroidTest("com.google.dagger:hilt-android-compiler:2.50")
 
     androidTestImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:$nhaarmanMockito")
     androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTest") {

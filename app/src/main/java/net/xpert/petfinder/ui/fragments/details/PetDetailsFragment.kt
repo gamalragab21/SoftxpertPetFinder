@@ -38,13 +38,15 @@ class PetDetailsFragment : BaseFragment<FragmentPetDetailsScreenBinding>() {
 
 
     private fun loadPetDetails() = with(binding) {
-        Glide.with(requireContext()).load(petItem.getSmallPhotoUrl())
+        Glide.with(requireContext()).load(petItem.photos.medium)
             .placeholder(PetFinderDrawable.ic_place_holder)
             .into(petImg)
         petNameValue.text = petItem.name.ifEmpty { requireContext().getString(PetFinderString.na) }
         petGenderValue.text =
             petItem.gender.ifEmpty { requireContext().getString(PetFinderString.na) }
         petTypeValue.text = petItem.type.ifEmpty { requireContext().getString(PetFinderString.na) }
+        petSizeValue.text = petItem.size.ifEmpty { requireContext().getString(PetFinderString.na) }
+        petAddressValue.text = petItem.address.ifEmpty { requireContext().getString(PetFinderString.na) }
     }
 
     private fun openWebsite(url: String) {

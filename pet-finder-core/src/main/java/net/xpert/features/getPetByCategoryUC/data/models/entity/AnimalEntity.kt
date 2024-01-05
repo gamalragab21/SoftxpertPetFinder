@@ -12,7 +12,9 @@ data class AnimalEntity(
     var gender: String,
     @PrimaryKey var id: Int,
     var name: String,
-    var photos: String,
+    @Embedded(prefix = "pet_photos_") var photos: PhotoEntity,
     var type: String,
+    var address: String,
+    var size: String,
     var url: String,
 )

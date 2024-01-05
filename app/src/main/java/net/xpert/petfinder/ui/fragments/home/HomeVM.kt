@@ -10,7 +10,7 @@ import net.xpert.features.getPetByCategoryUC.data.models.CategoryPetRequest
 import net.xpert.features.getPetByCategoryUC.domain.interactor.GetPetByCategoryUC
 import net.xpert.features.getPetTypes.domain.enums.PetType
 import net.xpert.features.getUserTokenUC.data.models.TokenRequest
-import net.xpert.features.getUserTokenUC.domain.interactor.GenerateUserTokenUC
+import net.xpert.features.getUserTokenUC.domain.interactor.TokenRefreshUC
 import net.xpert.petfinder.android.viewModel.AndroidBaseViewModel
 import javax.inject.Inject
 
@@ -18,7 +18,7 @@ import javax.inject.Inject
 class HomeVM @Inject constructor(
     context: Application,
     private val getPetByCategoryUC: GetPetByCategoryUC,
-    private val generateUserTokenUC: GenerateUserTokenUC,
+    private val generateUserTokenUC: TokenRefreshUC,
     private val configurationUtil: IConfigurationUtil
 ) : AndroidBaseViewModel<HomeState>(context) {
 

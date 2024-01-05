@@ -11,8 +11,11 @@ import androidx.navigation.fragment.NavHostFragment
 import dagger.hilt.android.AndroidEntryPoint
 import net.xpert.petfinder.R
 import net.xpert.petfinder.android.base.BaseActivity
+import net.xpert.petfinder.android.extension.PetFinderId
+import net.xpert.petfinder.android.extension.hideStatusBars
 import net.xpert.petfinder.android.extension.onBackClicked
 import net.xpert.petfinder.android.extension.show
+import net.xpert.petfinder.android.extension.showStatusBars
 import net.xpert.petfinder.android.viewModel.CurrentAction
 import net.xpert.petfinder.databinding.ActivityMainBinding
 
@@ -48,7 +51,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
     override fun onDestinationChanged(
         controller: NavController, destination: NavDestination, arguments: Bundle?
     ) {
-        // we can hide or show toolbar as u want based on destination id
+        when (destination.id) {
+            PetFinderId.entryPointFragment -> hideStatusBars()
+            else -> showStatusBars()
+        }
     }
 
     override fun onDestroy() {

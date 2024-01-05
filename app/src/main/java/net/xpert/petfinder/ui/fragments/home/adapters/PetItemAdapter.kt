@@ -41,7 +41,7 @@ class PetItemAdapter @Inject constructor(
     inner class ViewHolder(val binding: ItemPetLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(item: Animal) = binding.apply {
-            Glide.with(context).load(item.getSmallPhotoUrl())
+            Glide.with(context).load(item.photos.small)
                 .placeholder(PetFinderDrawable.ic_place_holder)
                 .into(petImg)
             petNameValue.text = item.name.ifEmpty { context.getString(PetFinderString.na) }
