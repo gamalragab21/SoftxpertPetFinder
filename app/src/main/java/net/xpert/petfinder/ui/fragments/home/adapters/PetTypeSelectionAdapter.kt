@@ -48,15 +48,18 @@ class PetTypeSelectionAdapter @Inject constructor(
 
             itemTextSelection.text = item.type
 
-
             root.setOnClickListener {
-                if (lastItemClicked != layoutPosition) {
-                    notifyItemChanged(lastItemClicked)
-                    lastItemClicked = layoutPosition
-                    notifyItemChanged(lastItemClicked)
-                    onItemClickListener?.invoke(item)
-                }
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) handleItemClick(position)
             }
+        }
+    }
+
+    private fun handleItemClick(position: Int) {
+        if (lastItemClicked != position) {
+            notifyItemChanged(lastItemClicked)
+            lastItemClicked = position
+            notifyItemChanged(lastItemClicked)
         }
     }
 

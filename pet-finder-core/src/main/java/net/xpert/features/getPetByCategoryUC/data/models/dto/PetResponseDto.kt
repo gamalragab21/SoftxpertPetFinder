@@ -6,5 +6,7 @@ import net.xpert.core.common.data.model.dto.BaseDto
 
 internal data class PetResponseDto(
     @SerializedName("animals")
-    var animals: List<AnimalDto>
+    var animals: List<AnimalDto>,
+    @SerializedName("pagination")
+    var pagination: PaginationDto
 ) : BaseDto()

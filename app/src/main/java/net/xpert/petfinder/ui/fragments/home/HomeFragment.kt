@@ -12,6 +12,7 @@ import net.xpert.petfinder.android.extension.navigateSafe
 import net.xpert.petfinder.android.extension.observe
 import net.xpert.petfinder.android.extension.show
 import net.xpert.petfinder.android.extension.showSnackBar
+import net.xpert.petfinder.android.helpers.components.OnEndless
 import net.xpert.petfinder.android.viewModel.CurrentAction
 import net.xpert.petfinder.databinding.FragmentHomeBinding
 import net.xpert.petfinder.ui.fragments.home.adapters.PetItemAdapter
@@ -27,6 +28,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     @Inject
     lateinit var petItemAdapter: PetItemAdapter
     private val homeVM: HomeVM by viewModels()
+    private var scrollListener: OnEndless? = null
 
     override fun onFragmentReady() {
         setToolBarConfigs(
@@ -39,15 +41,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         initSelectionPetTypesRecyclerView()
         initPetTypeItemsRecyclerView()
 
-        petTypeSelectionAdapter.petTypeItems = PetType.entries.toList()
         setActions()
     }
 
     private fun setActions() {
+
         petTypeSelectionAdapter.setOnItemClickListener { petType ->
-            petItemAdapter.animals = emptyList()
-            homeVM.getPetByCategoryType(petType)
+            petItemAdapter.clearData()
+            scrollListener?.rest()
+            homeVM.getPetByCategoryType(petType, 1, "setOnItemClickListener")
         }
+
         petItemAdapter.setOnItemClickListener {
             navigateSafe(HomeFragmentDirections.actionHomeFragmentToPetDetailsFragment(it))
         }
@@ -62,28 +66,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun onRefreshView() {
-        homeVM.getPetByCategoryType(petTypeSelectionAdapter.getLasItemClicked())
+        homeVM.getPetByCategoryType(petTypeSelectionAdapter.getLasItemClicked(), 1, "onRefreshView")
     }
 
     private fun handleUiState(state: HomeState) {
         when (state) {
-            is HomeState.Failure -> {
-                handleHttpsStatusCode(state.exception)
-                updateNoDataView(
-                    true,
-                    state.exception.message ?: getString(PetFinderString.unknown_error_occur)
-                )
-            }
+            is HomeState.Failure -> handleHttpsStatusCode(state.exception)
 
             is HomeState.Loading -> {
                 showProgress(state.loading)
                 if (!state.loading) stopSwipeRefreshLoading()
             }
 
-            is HomeState.ShowPetData -> {
-                petItemAdapter.animals = state.animals
-                updateNoDataView(state.animals.isEmpty())
-            }
+            is HomeState.ShowPetData -> petItemAdapter.appendList(state.animals)
+
+            is HomeState.UpdateNoDataView -> updateNoDataView(state.show, state.errorMessage)
         }
     }
 
@@ -95,7 +92,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun initSelectionPetTypesRecyclerView() = binding.petTypeSelectionRecyclerView.apply {
         init(lm = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false))
-        adapter = petTypeSelectionAdapter
+        adapter = petTypeSelectionAdapter.apply {
+            petTypeItems = PetType.entries.toList()
+        }
     }
 
     private fun initPetTypeItemsRecyclerView() = binding.petsFinderRecyclerView.apply {
@@ -104,6 +103,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             nestedScroll = true
         )
         adapter = petItemAdapter
+        setupPaginationListener()
+    }
+
+    private fun setupPaginationListener() = with(binding.petsFinderRecyclerView) {
+        scrollListener = object :
+            OnEndless((layoutManager as LinearLayoutManager), 1) {
+            override fun onLoadMore(currentPage: Int) {
+                homeVM.loadCurrentPage(currentPage)
+            }
+        }
+        scrollListener?.let {
+            addOnScrollListener(it)
+        }
+    }
+
+    override fun onDestroyView() {
+        scrollListener?.let { binding.petsFinderRecyclerView.removeOnScrollListener(it) }
+        super.onDestroyView()
     }
 
     override fun onRetryCurrentAction(currentAction: CurrentAction?, message: String) {

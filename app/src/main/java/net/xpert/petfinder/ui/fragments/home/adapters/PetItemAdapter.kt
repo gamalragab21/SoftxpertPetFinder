@@ -20,7 +20,17 @@ class PetItemAdapter @Inject constructor(
 
     private var onItemClickListener: ((Animal) -> Unit)? = null
 
-    var animals: List<Animal>
+    fun appendList(subList: List<Animal>) {
+        val updatedList = ArrayList(animals)
+        updatedList.addAll(subList)
+        animals = updatedList
+    }
+
+    fun clearData() {
+        animals = emptyList()
+    }
+
+    private var animals: List<Animal>
         get() = differ.currentList
         set(value) = differ.submitList(value)
 
@@ -38,7 +48,7 @@ class PetItemAdapter @Inject constructor(
         onItemClickListener = listener
     }
 
-    inner class ViewHolder(val binding: ItemPetLayoutBinding) :
+    inner class ViewHolder(private val binding: ItemPetLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(item: Animal) = binding.apply {
             Glide.with(context).load(item.photos.small)
@@ -61,7 +71,6 @@ class PetItemAdapter @Inject constructor(
                 parent, false
             )
         )
-
 
     override fun getItemCount(): Int = animals.size
 

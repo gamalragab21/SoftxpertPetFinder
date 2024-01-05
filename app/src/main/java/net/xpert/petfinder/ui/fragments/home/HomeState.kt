@@ -8,4 +8,5 @@ sealed class HomeState : ViewState {
     data class Loading(val loading: Boolean) : HomeState()
     data class Failure(val exception: LeonException) : HomeState()
     data class ShowPetData(val animals: List<Animal>) : HomeState()
+    data class UpdateNoDataView(val show: Boolean = false, val errorMessage: String?=null) : HomeState()
 }
