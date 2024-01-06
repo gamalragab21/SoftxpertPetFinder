@@ -51,7 +51,7 @@ Follow these steps to get the PetFinder app up and running on your local machine
    Open the project in Android Studio by selecting "Open an existing Android Studio project" and navigating to the cloned `petfinder` directory.
 
 2. **Set Up API Keys:**
-   Obtain the necessary API keys for services like Retrofit or any other external APIs used in the app. Place the keys in the appropriate configuration file (e.g., `app/build.gradle` or a separate `api_keys.xml` file).
+   Obtain the necessary API keys for services like Retrofit or any other external APIs used in the app. Place the keys in the appropriate configuration file (e.g., `app/build.gradle` or a separate `pet-finder-configuration.properties` file).
 
 3. **Build and Run:**
    Build the project by clicking on the "Build" option in the top menu and selecting "Rebuild Project". After a successful build, run the app on an emulator or a physical device by clicking on the "Run" option.
@@ -64,6 +64,7 @@ Follow these steps to get the PetFinder app up and running on your local machine
 To run unit tests, use the following command:
 ```bash
 ./gradlew test
+```
 
 ## Contributing
 
