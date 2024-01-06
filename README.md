@@ -92,9 +92,5 @@ Please adhere to the coding standards and best practices used in the project. Th
 
 If you have a significant feature in mind, consider opening an issue to discuss it before implementing it. This helps ensure that your proposed feature aligns with the project's goals and doesn't overlap with existing or planned work.
 
-### Code of Conduct
-
-Be respectful and considerate when contributing to PetFinder. Follow our [Code of Conduct](CODE_OF_CONDUCT.md) to create a positive and inclusive environment for everyone.
-
 Thank you for considering contributing to PetFinder! Your help is valuable in making the app better for everyone.
 
