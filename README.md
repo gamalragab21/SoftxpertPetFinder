@@ -5,9 +5,9 @@ Welcome to PetFinder, an Android app that helps you find information about vario
 ## Screenshots
 
 <img src="screenshots/pet_splash_screen.jpg" width="200">&nbsp;
-<img src="screenshots/pet_home_screen1" width="200">&nbsp;
-<img src="screenshots/pet_home_screen2" width="200">&nbsp;
-<img src="screenshots/pet_details_screen" width="200">&nbsp;
+<img src="screenshots/pet_home_screen1.jpg" width="200">&nbsp;
+<img src="screenshots/pet_home_screen2.jpg" width="200">&nbsp;
+<img src="screenshots/pet_details_screen.jpg" width="200">&nbsp;
 
 ## Features
 
