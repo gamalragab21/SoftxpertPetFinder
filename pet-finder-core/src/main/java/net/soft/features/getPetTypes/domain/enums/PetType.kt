@@ -1,7 +1,7 @@
 package net.soft.features.getPetTypes.domain.enums
 
 enum class PetType(
-    val id: Int, val type: String
+    val id: Int, var type: String
 ) {
     ALL(1, "All"),
     CAT(2, "Cat"),

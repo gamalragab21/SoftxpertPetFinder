@@ -5,9 +5,9 @@ import org.json.JSONArray
 import java.lang.reflect.Type
 
 fun <M> M.toJson(): String = Gson().toJson(this)
- fun <M> String.getModelFromJSON(tokenType: Type): M = Gson().fromJson(this, tokenType)
+fun <M> String.getModelFromJSON(tokenType: Type): M = Gson().fromJson(this, tokenType)
 
-internal fun JSONArray.jsonArrayToHashMap(): HashMap<String, String> {
+fun JSONArray.jsonArrayToHashMap(): HashMap<String, String> {
     val hashMap = HashMap<String, String>()
     for (i in 0 until length()) {
         val jsonObject = getJSONObject(i)
