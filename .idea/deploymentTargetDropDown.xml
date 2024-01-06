@@ -2,6 +2,15 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="ExtensionsTest">
+        <State />
+      </entry>
+      <entry key="ExtensionsTest (1)">
+        <State />
+      </entry>
+      <entry key="PetFinderDaoTest">
+        <State />
+      </entry>
       <entry key="app">
         <State />
       </entry>

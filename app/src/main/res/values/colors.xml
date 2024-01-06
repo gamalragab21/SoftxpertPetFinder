@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!--  For Default  -->
+    <color name="colorPrimary">#0C0C0C</color>
+    <color name="colorPrimaryVariant">#FFFFFFFF</color>
+    <color name="colorOnPrimary">#F6F5FA</color>
+
+    <color name="colorPrimaryDark">#0C0C0C</color>
+
+    <color name="disabled">#E4E4E4</color>
+    <color name="details_screen">#EFEFEF</color>
+    <color name="greyColor">#a5a5a5</color>
+    <color name="greyColor_black">#8F8D8D</color>
+    <color name="grey_border">#EFEFEF</color>
+    <color name="btn_dis_enable">#504F4F</color>
+    <color name="colorBlackHalfOpacity">#80000000</color>
+    <color name="colorCancel">#db1233</color>
+    <color name="red_dark">#AB0924</color>
+    <color name="blue_facebook">#1877F2</color>
+    <color name="orange">#ff8d4d</color>
+
+    <color name="gray_background">#ebebeb</color>
+    <color name="gray_background2">#D9D9D9</color>
+
+    <!--  For Network  -->
+    <color name="colorNetworkConnected">#00C853</color>
+    <color name="colorNetworkWaiting">#FDD835</color>
+    <color name="colorNetworkLost">#FF1744</color>
 </resources>

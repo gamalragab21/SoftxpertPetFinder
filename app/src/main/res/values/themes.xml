@@ -1,16 +1,78 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
-    <style name="Theme.PetFinder" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.PetFinder" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/colorPrimary</item>
+        <item name="colorSecondaryVariant">@color/colorPrimary</item>
+        <item name="colorOnSecondary">@color/colorBlackHalfOpacity</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="AppBarLayout" parent="Widget.MaterialComponents.AppBarLayout.Primary">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="elevation">0dp</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+    <style name="Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/_50sdp</item>
+        <item name="titleTextColor">@color/black</item>
+        <item name="buttonGravity">center_vertical</item>
+        <item name="titleTextAppearance">@style/Toolbar.TextAppearance</item>
+
+    </style>
+
+    <style name="Toolbar.TextAppearance" parent="Font.Medium">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="BaseLayout" parent="Theme.PetFinder">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    // ------------------------------------------- Fonts -------------------------------------------
+
+    <style name="Font" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="Font.Medium" parent="Font">
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="ImageButton" parent="Widget.AppCompat.ImageButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
+
+    <style name="PetFinderButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:padding">@dimen/_6sdp</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">@dimen/_13ssp</item>
+        <item name="fontFamily">@font/poppins_bold</item>
+        <item name="cornerRadius">@dimen/_20sdp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/button_background</item>
+        <item name="backgroundTint">@null</item>
     </style>
 </resources>

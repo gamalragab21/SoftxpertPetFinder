@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph.xml"
+    app:startDestination="@id/entryPointFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="net.soft.petFinder.ui.fragments.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_petDetailsFragment"
+            app:destination="@id/petDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/entryPointFragment"
+        android:name="net.soft.petFinder.ui.fragments.entryPoint.EntryPointFragment"
+        android:label="EntryPointFragment"
+        tools:layout="@layout/fragment_entry_point">
+        <action
+            android:id="@+id/action_entryPointFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/petDetailsFragment"
+        android:name="net.soft.petFinder.ui.fragments.details.PetDetailsFragment"
+        android:label="PetDetailsFragment"
+        tools:layout="@layout/fragment_pet_details_screen">
+        <argument
+            android:name="animal"
+            app:argType="net.soft.features.getPetByCategoryUC.domain.models.Animal" />
+    </fragment>
+</navigation>

@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Pet Finder</string>
+    <string name="unknown_error_occur">Unknown Error Occurred!!</string>
+    <string name="retry">Retry</string>
+    <string name="pets">Pets</string>
+    <string name="all">All</string>
+    <string name="name">Name</string>
+    <string name="gender">Gender</string>
+    <string name="type">Type</string>
+    <string name="pet_amp_care"><![CDATA[Pet & Care]]></string>
+    <string name="taking_care_of_your_pets">taking care of your pets</string>
+    <string name="na">NA</string>
+    <string name="pet_details">Pet Details</string>
+    <string name="pet_s_website">Pet\'s Website</string>
+    <string name="no_data_found">No Data Found</string>
+    <string name="size">Size</string>
+    <string name="address">Address</string>
 </resources>
