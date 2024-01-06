@@ -4,14 +4,17 @@ Welcome to PetFinder, an Android app that helps you find information about vario
 
 ## Screenshots
 
-![Splash Screen](screenshots/splash_screen.png)
+![Splash Screen](screenshots/pet_splash_screen.jpg)
 *Caption: The engaging splash screen while the app loads.*
 
-![Home Screen](screenshots/home_screen.png)
-*Caption: The home screen displaying all categories of pets with detailed information.*
+![Home Screen](screenshots/pet_home_screen1.jpg)
+*Caption: The home screen displays all categories of pets with detailed information.*
 
-![Category Details Screen](screenshots/category_details_screen.png)
-*Caption: The category details screen showing specific information for each pet category.*
+![Home Screen](screenshots/pet_home_screen1.jpg)
+*Caption: The home screen displays all categories of pets with detailed information and set placeholders for images.*
+
+![Category Details Screen](screenshots/pet_details_screen.jpg)
+*Caption: The category details screen shows specific pet category information.*
 
 ## Features
 
